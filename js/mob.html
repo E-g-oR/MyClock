@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>MyClock</title>
+	<link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js"></script>
+    <style>
+        *{padding:0;margin:0;border:none;outline:none}body{background-color:#bdc3c7;color:#000;font-family:Consolas,sans-serif;font-size:20px}.section{padding:0 50px}.section .container{max-width:1200px;min-height:100vh;margin:0 auto;position:relative}.section .container .clock{display:flex;justify-content:center;align-items:center;position:absolute;top:0;left:0;height:100%;width:100%}.section .container .clock .clock__face{width:200px;height:200px;border-radius:50%;border:2px solid #bdc3c7;box-shadow:4px 4px 15px rgba(0,0,0,0.5),-6px -6px 15px rgba(255,255,255,0.65),inset 2px 2px 15px rgba(0,0,0,0.5),inset -4px -4px 15px rgba(255,255,255,0.7);display:flex;justify-content:center;align-items:center;position:relative}.section .container .clock .clock__face #time{position:absolute;text-transform:uppercase;top:60%}.section .container .clock .clock__face:before{content:"";display:block;background-color:#000;width:6px;height:6px;border-radius:50%;border:0.5px solid #0984e3;z-index:15}.section .container .clock .clock__face .numb{position:absolute}.section .container .clock .clock__face .numb.noon{top:5px;left:50%;transform:translateX(-50%)}.section .container .clock .clock__face .numb.tree{top:50%;transform:translateY(-50%);right:5px}.section .container .clock .clock__face .numb.half{bottom:5px;left:50%;transform:translateX(-50%)}.section .container .clock .clock__face .numb.nine{top:50%;transform:translateY(-50%);left:5px}.section .container .clock .clock__face .line{position:absolute;display:block;background-color:#000;transform:translateY(-50%);transform-origin:54% 80%;border-radius:15px}.section .container .clock .clock__face .line#clock__mline{width:4px;height:31%}.section .container .clock .clock__face .line#clock__hline{width:4px;height:20%}.section .container .clock .clock__face .line#clock__sline{background-color:#0984e3;width:2px;height:38%}.section .container .clock .clock__face .lin{position:absolute;width:95%;height:2px;overflow:hidden}.section .container .clock .clock__face .lin.a{transform:rotate(-60deg)}.section .container .clock .clock__face .lin.b{transform:rotate(-30deg)}.section .container .clock .clock__face .lin.c{transform:rotate(30deg)}.section .container .clock .clock__face .lin.d{transform:rotate(60deg)}.section .container .clock .clock__face .lin:after,.section .container .clock .clock__face .lin:before{content:"";display:block;height:100%;width:10%;position:absolute;background-color:#636e72}.section .container .clock .clock__face .lin:before{left:0}.section .container .clock .clock__face .lin:after{right:0}
+    </style>
+    <script>
+        function currentTime() {
+        var elem = document.getElementById("currentTime");
+        var deg = 0;
+        
+        function timeChange() {
+            var t = document.getElementById("time");
+            var time = new Date();
+            var hour = time.getHours();
+            var min = time.getMinutes();
+            var sec = time.getSeconds();
+            var mil = time.getMilliseconds();
+            if (hour>11) {
+                t.textContent = "pm";
+            } else t.textContent = "am";
+            deg+=0.18;
+            var sline = document.getElementById("clock__sline");
+            var hline = document.getElementById("clock__hline");
+            var mline = document.getElementById("clock__mline");
+            sline.style.transform = "translate(0%, -30%) rotate("+sec*6+"deg)";
+            mline.style.transform = "translate(0%, -30%) rotate("+min*6+"deg)"; 
+            hline.style.transform = "translate(0%, -30%) rotate("+hour*30+"deg)";
+        }
+        setInterval(timeChange, 30);
+    }
+    currentTime()
+    </script>
+</head>
+<body>
+	<div class="section">
+		<div class="container">
+			<div class="clock">
+				<div class="clock__face">
+					<span class="numb noon">12</span>
+					<span class="numb tree">3</span>
+					<span class="numb half">6</span>
+					<span class="numb nine">9</span>
+
+					<h3 id="time">am</h3>
+					<span class="lin a"></span>
+					<span class="lin b"></span>
+					<span class="lin c"></span>
+					<span class="lin d"></span>
+
+
+					<span class="line" id="clock__sline"></span>
+					<span class="line" id="clock__mline"></span>
+					<span class="line" id="clock__hline"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
